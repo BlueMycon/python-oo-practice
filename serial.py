@@ -22,6 +22,9 @@ class SerialGenerator:
         """Establishes starting point and saved place in count"""
         self.start = self.count = start
 
+    def __repr__(self):
+        return f"<SerialGenerator start={self.start} next={self.count}>"
+
     def generate (self):
         """Increments self.count by 1 and returns self.count"""
         self.count += 1

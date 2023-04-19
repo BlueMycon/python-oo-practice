@@ -1,25 +1,25 @@
 from random import choice
 
 class WordFinder:
-    """Word Finder: finds random words from a dictionary."""
+    """Word Finder: finds random words from a dictionary.
+
+    >>> wf = WordFinder("/usr/share/dict/words")
+    235886 words read
+
+    >>> 
+
+
+    """
 
     def __init__(self, path):
         """Opens file, initializes words list, parses file, prints words count"""
-        self.file = open(path)
-        self.words = []
-        self.parse()
+        file = open(path)
+        self.words = self.parse(file)
         self.print_count()
 
-    def parse(self):
+    def parse(self, file):
         """line by line, strips whitespace and \n, and appends line to words list"""
-        for line in self.file:
-            self.parse_line(line)
-
-    def parse_line(self, line):
-        """Parse individual line and append to list"""
-        line.strip()
-        line = line[:len(line) - 1]
-        self.words.append(line)
+        return [line.strip() for line in file]
 
     def print_count(self):
         """Print number of words in list"""
@@ -30,26 +30,9 @@ class WordFinder:
         return choice(self.words)
 
 class SpecialWordFinder(WordFinder):
-    """Special Word Finder: finds a random word from a special dictionary"""
+    """Special Word Finder: Word Finder that ignores comments and blank lines"""
 
-    def __init__(self, path):
-        """Parent init opens file, initializes words list, parses file, prints words count"""
-        super().__init__(path)
-
-    def parse(self):
+    def parse(self, file):
         """line by line, removes comment lines and \n,
            strips whitespace and \n, and appends line to words list"""
-        for line in self.file:
-            if line[0] == "#" or line[0] == "\n":
-                continue
-            else:
-                super().parse_line(line)
-
-    def print_count(self):
-        """Print number of words in list"""
-        return super().print_count()
-
-    def random(self):
-        """Return a random word"""
-        return super().random()
-
+        return [line.strip() for line in file if not line.startswith(("#", "\n"))]
