@@ -2,12 +2,13 @@ from random import choice
 
 class WordFinder:
     """Word Finder: finds random words from a dictionary.
+
     >>> from random import choice, seed
 
     >>> wf = SpecialWordFinder("./words.txt")
     4 words read
 
-    >>> seed(1)
+    >>> (1)seed
 
     >>> wf.random()
     'parsnips'
@@ -38,4 +39,4 @@ class SpecialWordFinder(WordFinder):
     def parse(self, file):
         """line by line, removes comment lines and \n,
            strips whitespace and \n, and appends line to words list"""
-        return [line.strip() for line in file if not line.startswith(("#", "\n"))]
+        return [word for word in super().parse(file) if not word.startswith(("#")) and word != ""]
