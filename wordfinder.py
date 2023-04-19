@@ -2,12 +2,15 @@ from random import choice
 
 class WordFinder:
     """Word Finder: finds random words from a dictionary.
+    >>> from random import choice, seed
 
-    >>> wf = WordFinder("/usr/share/dict/words")
-    235886 words read
+    >>> wf = SpecialWordFinder("./words.txt")
+    4 words read
 
-    >>> 
+    >>> seed(1)
 
+    >>> wf.random()
+    'parsnips'
 
     """
 
